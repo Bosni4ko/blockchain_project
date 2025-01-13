@@ -1,0 +1,14 @@
+{
+    "pedro": {
+        "first_name": "Katerina",
+        "last_name": "Kuzmina",
+        "email": "",
+        "phone": "",
+        "city": "Riga",
+        "breeder": true,
+        "license": "",
+        "id": "",
+        "compliance": true,
+        "additional_info": ""
+    }
+}

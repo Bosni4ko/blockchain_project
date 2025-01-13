@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.7.3/dist/web3.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Pet Registry</title>
+    <button id="connect-wallet">Connect Wallet</button>
+    <p id="wallet-address">Wallet Address: Not Connected</p>
+
+</head>
+<body>
+<div class="navbar">
+    <h1>Pet Registry</h1>
+    <div>
+        <button onclick="showRegisterForm()">Register</button>
+        <button onclick="showLoginForm()">Log in</button>
+    </div>
+</div>
+
+<!-- Register Modal -->
+<div class="modal" id="registerModal">
+    <div class="modal-content">
+        <h2>Register</h2>
+        <form id="registerForm" method="POST" action="register.php">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="confirm_password">Confirm Password:</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+
+            <button type="submit">Register</button>
+            <button type="button" onclick="closeRegisterForm()">Close</button>
+        </form>
+    </div>
+</div>
+
+<!-- Login Modal -->
+<div class="modal" id="loginModal">
+    <div class="modal-content">
+        <h2>Log in</h2>
+        <form id="loginForm" method="POST" action="login.php">
+            <label for="login_username">Username:</label>
+            <input type="text" id="login_username" name="username" required>
+
+            <label for="login_password">Password:</label>
+            <input type="password" id="login_password" name="password" required>
+
+            <button type="submit">Log in</button>
+            <button type="button" onclick="closeLoginForm()">Close</button>
+        </form>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<div class="parent">
+    <div class="div1">
+        <h1 class="center">Connect MetaMask to a webpage</h1>
+        <h2 class="center">This page shows you how to connect MetaMask to a webpage to create a DApp!</h2>
+        <h3 class="center">Check the source code in the <a href="https://github.com/soos3d/connect-metamask-to-webpage" target="_blank">GitHub repo</a>.</h3>
+        <p class="center">Click the button to prompt MetaMask to connect</p>
+    </div>
+
+    <div class="div2">
+        <h3>Click the button to connect MetaMask to the website</h3>
+        <button onclick="connect()">Connect Wallet</button>
+    </div>
+</div>
+
+<script>
+    // Identify the accounts and connect MetaMask to the website.
+    function connect() {
+        ethereum
+            .request({
+                method: 'eth_requestAccounts'
+            })
+            .then(handleAccountsChanged)
+            .catch((error) => {
+                if (error.code === 4001) {
+                    // EIP-1193 userRejectedRequest error
+                    console.log('Please connect to MetaMask.');
+                } else {
+                    console.error(error);
+                }
+            });
+    }
+</script>
+
+</body>
+</html>
